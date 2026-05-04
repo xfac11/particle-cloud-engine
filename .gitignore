@@ -1475,3 +1475,11 @@ dkms.conf
 *.uf2
 # Raspberry Pi Pico disassembler file
 *.dis
+
+build/
+build-ninja/
+.vs/
+out/
+bin/
+obj/
+*.user

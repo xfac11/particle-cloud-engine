@@ -5,3 +5,6 @@ float AddValues(float a, float b) {
 float SubtractValues(float a, float b) {
     return a - b;
 }
+float MultiplyValues(float a, float b) {
+    return a * b;
+}

@@ -2,11 +2,11 @@
 using System.Runtime.InteropServices;
 
 Console.WriteLine("Hello, World!");
-[DllImport("Engine.Compute")] // .NET är smart nog att själv lägga till .dll eller .so beroende på OS
+[DllImport("libEngine.Compute")] // .NET är smart nog att själv lägga till .dll eller .so beroende på OS
 static extern float AddValues(float a, float b);
 
 
-[DllImport("Engine.Compute")]
+[DllImport("libEngine.Compute")]
 static extern float SubtractValues(float a, float b);
 
 float addedValue = AddValues(3, 3);

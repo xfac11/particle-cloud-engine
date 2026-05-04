@@ -12,12 +12,7 @@
     <Platforms>x64</Platforms>
   </PropertyGroup>
   
-  <ItemGroup>
-    <Content Include="..\..\Engine.Compute\build\Debug\Engine.Compute.dll">
-      <Link>Engine.Compute.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
+  
 
 </Project>
 
