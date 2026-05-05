@@ -12,7 +12,10 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CSHARP_BIN_DIR})
 
 add_library(Engine.Compute SHARED
     src/test.cpp
+    src/particle.cpp
     include/test.hpp
+    include/pch.hpp
+    include/particle.hpp
 )
 
 target_include_directories(Engine.Compute PUBLIC
@@ -22,3 +25,6 @@ target_include_directories(Engine.Compute PUBLIC
 set_target_properties(Engine.Compute PROPERTIES
     ARCHIVE_OUTPUT_DIRECTORY ${CSHARP_BIN_DIR}
 )
+
+target_precompile_headers(Engine.Compute PRIVATE include/pch.hpp)
+

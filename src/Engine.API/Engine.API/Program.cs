@@ -16,3 +16,14 @@ Console.WriteLine(addedValue);
 float subtractedValue = SubtractValues(20, 3);
 
 Console.WriteLine(subtractedValue);
+
+
+[DllImport("libEngine.Compute")]
+static extern void UpdateParticle(ref Engine.API.Particle p, float deltaTime);
+
+
+
+var particle = new Engine.API.Particle { x = 3, y = 1, z = 2 };
+Console.WriteLine($"Innan: {particle.x}, {particle.y}, {particle.z}");
+UpdateParticle(ref particle, 0.0f);
+Console.WriteLine($"Efter: {particle.x}, {particle.y}, {particle.z}");
