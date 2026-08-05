@@ -4,7 +4,3 @@ struct Particle {
     float vx, vy, vz; // Velocity
     float mass; // Mass
 };
-
-extern "C" {
-    __declspec(dllexport) void UpdateParticle(Particle* particle, float deltaTime);
-}

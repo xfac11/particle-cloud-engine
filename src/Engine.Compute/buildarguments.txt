@@ -1,0 +1,1 @@
+cmake -G "Ninja" -DCMAKE_TOOLCHAIN_FILE=[VÄG_TILL_VCPKG]/scripts/buildsystems/vcpkg.cmake -DCMAKE_BUILD_TYPE=Debug ..

@@ -1,0 +1,8 @@
+{
+  "name": "engine-compute",
+  "version": "0.1.0",
+  "dependencies": [
+    "vulkan",
+    "glm"
+  ]
+}
