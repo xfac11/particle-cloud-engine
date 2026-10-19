@@ -47,6 +47,8 @@ A command assigned to tick N affects the calculation that produces state N. Once
 
 A tick is complete only after all simulation work needed to establish its authoritative state has completed. In the target GPU path, that includes required GPU execution and synchronization. Snapshot availability is a separate milestone.
 
+A native step represents one fixed logical tick and does not accept arbitrary wall-clock delta time; scheduling belongs outside the engine. Native calls return explicit status values, and exceptions must never cross the C ABI. Validation failures before execution starts leave state unchanged. If a failure occurs after execution begins, the instance is marked `Failed` unless the implementation can prove the authoritative state remains valid. An incomplete tick must never be reported as complete or exposed as a snapshot.
+
 ## Realtime and deterministic/offline execution
 
 The same simulation-step semantics should support both:
