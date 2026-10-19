@@ -86,9 +86,13 @@ Publishing validates and resolves a stable set of dependency revisions. Later ed
 
 **Decision:** The native boundary exposes opaque handles and explicit C-compatible types, not C++ classes, STL containers, Vulkan objects, exceptions, or internal GPU layouts. Native exceptions do not cross the ABI; native calls return explicit status/results. .NET wraps native handles in SafeHandle. Native memory exposed across the ABI has explicit owner and lifetime.
 
-**Why:** Allows C++/GPU internals to evolve without leaking implementation layout into .NET contracts.
+**Confirmed API contract:** Creation uses a status-returning function with an output handle (for example, `EngineCreate(options, &handle)`); a failed create leaves the output handle null. Calls use explicit status enums and fixed-width C-compatible values. The native diagnostic is retrievable separately and is best-effort text, not a stable machine-readable contract. A logical step represents one fixed simulation tick; it does not accept arbitrary wall-clock delta time.
 
-**See:** [Overview](overview.md), [Snapshots and transport](snapshot-and-transport.md).
+**Failure semantics:** Argument and validation failures before execution begins do not mutate simulation state. If a step fails after execution begins, the instance transitions to `Failed` unless the engine can prove that authoritative state remains valid. Incomplete ticks are never reported as complete or published. Destroy accepts a null handle and cleanup must account for partially initialized resources.
+
+**Why:** Allows C++/GPU internals to evolve without leaking implementation layout into .NET contracts and makes failures observable without exceptions crossing the ABI.
+
+**See:** [Overview](overview.md), [Snapshots and transport](snapshot-and-transport.md), [Simulation lifecycle](simulation-lifecycle.md).
 
 ### D-011 — Snapshots are immutable versioned observations
 
