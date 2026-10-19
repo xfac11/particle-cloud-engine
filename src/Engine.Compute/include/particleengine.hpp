@@ -1,30 +1,35 @@
 #pragma once
-#include <exception>
-#include<pch.hpp>
-#include<particle.hpp>
+
+#include <particle.hpp>
+#include <pch.hpp>
+#include <cstdint>
 
 class ParticleEngine {
-private:    
+private:
+    enum class State {
+        Ready,
+        Failed
+    };
+
     std::vector<Particle> m_particles;
-    VkInstance m_instance;
-    VkPhysicalDevice m_physicalDevice;
-    VkDevice m_device;
-    
+    VkInstance m_instance = VK_NULL_HANDLE;
+    VkPhysicalDevice m_physicalDevice = VK_NULL_HANDLE;
+    VkDevice m_device = VK_NULL_HANDLE;
+    State m_state = State::Ready;
+
     void initVulkan();
     void createInstance();
     void pickPhysicalDevice();
     void createLogicalDevice();
+    void cleanup() noexcept;
 
-    void cleanup();
 public:
-    ParticleEngine(int particleCount);
-    virtual ~ParticleEngine();
+    explicit ParticleEngine(uint32_t particleCount);
+    ~ParticleEngine() noexcept;
 
-    void Update(float deltaTime);
+    ParticleEngine(const ParticleEngine&) = delete;
+    ParticleEngine& operator=(const ParticleEngine&) = delete;
+
+    // One logical fixed tick. Scheduler wall-clock delta is intentionally absent.
+    void Step();
 };
-
-extern "C" {
-    __declspec(dllexport) void* CreateParticleEngine(int particleCount);
-    __declspec(dllexport) void DestroyParticleEngine(void* enginePtr);
-    __declspec(dllexport) void UpdateParticles(void* enginePtr, float deltaTime);
-}
