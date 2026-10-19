@@ -1,5 +1,6 @@
 #pragma once
 
+#include <engine_abi.h>
 #include <particle.hpp>
 #include <pch.hpp>
 #include <cstdint>
@@ -31,5 +32,5 @@ public:
     ParticleEngine& operator=(const ParticleEngine&) = delete;
 
     // One logical fixed tick. Scheduler wall-clock delta is intentionally absent.
-    void Step();
+    EngineStatus Step() noexcept;
 };
